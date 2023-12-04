@@ -1,0 +1,51 @@
+// /*
+//  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+//  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+//  */
+// package com.mycompany.shopping.app.dbConnection;
+
+// import java.sql.Connection;
+// import java.sql.DriverManager;
+// import java.sql.SQLException;
+// /**
+//  *
+//  * @author THUSH
+//  */
+// public class SqlConnection {
+//        public Connection con;
+       
+//        public SqlConnection() throws SQLException{
+//         this.con = DriverManager.getConnection("jdbc:mysql://localhost:3306/textile_shop","shopping_user","password123");
+//     } 
+// }
+package com.mycompany.shopping.app.dbConnection;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class SqlConnection {
+    public Connection con;
+
+    public SqlConnection() {
+        try {
+            // Load the JDBC driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Establish the connection
+            String url = "jdbc:mysql://localhost:3306/textile_shop";
+            String username = "root";
+            String password = "Admin@12345";
+
+            this.con = DriverManager.getConnection(url, username, password);
+        } catch (ClassNotFoundException e) {
+            // Handle the case where the JDBC driver is not found
+            System.out.println("JDBC Driver not found--------------------------");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println("Connection Failed-------------------------");
+            // Handle the case where a database access error occurs
+            e.printStackTrace();
+        }
+    }
+}
